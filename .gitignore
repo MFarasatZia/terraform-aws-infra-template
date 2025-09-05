@@ -1,0 +1,5 @@
+.terraform
+terraform_plan
+*.tfvars
+.ssh
+.DS_Store

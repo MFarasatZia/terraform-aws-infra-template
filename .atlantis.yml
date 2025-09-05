@@ -1,0 +1,28 @@
+version: 3
+
+autodiscover:
+  mode: disabled
+
+projects:
+  - name: "example_infra"
+    dir: .
+    workspace: default
+    terraform_version: v1.6.6   # example version; keep your actual one if needed
+    autoplan:
+      enabled: true
+      when_modified:
+        - "*.tf"
+        - "*.tfvars"
+    apply_requirements: [approved]
+    workflow: default
+
+workflows:
+  default:
+    plan:
+      steps:
+        - init
+        - plan:
+            extra_args: ["-var-file=env/example.tfvars"]  # dummy var-file path
+    apply:
+      steps:
+        - apply
